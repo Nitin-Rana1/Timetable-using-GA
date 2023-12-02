@@ -58,41 +58,19 @@ public:
     void calcFitness(vector<Schedule> allSchedules)
     {
         fitness = 0;
+
+        // original order 2: TO > LH > SSPD > SPPW
         // step 1: check if sub and their lecture hours are completed in a week
         fitness += lecHoursFitness(allSchedules, 200);
 
         // step 2: check if teacher overlaps
-        fitness += teacherOverlapFitness(allSchedules, 100);
+        fitness += teacherOverlapFitness(allSchedules, 200);
 
         // step 3: if subject is taught in the same period in a week
         fitness += samePeriodPWFitness(allSchedules, 70);
 
         // step 4: if subject comes more than once in a day
         fitness += sameSubjectPDFitness(allSchedules, 85);
-
-        // step 5: check same subect same period in consecutive days of week
-        fitness += sameSubjectPeriodPWFitness(allSchedules, 10);
-    }
-    int sameSubjectPeriodPWFitness(vector<Schedule> &allSchedules, int rate)
-    {
-        int fitness = 0;
-        for (int i = 0; i < HOURS; i++)
-        {
-            unordered_set<string> subs;
-            for (int j = 0; j < DAYS; j++)
-            {
-                subs.insert(classTT[j][i].first);
-            }
-            if (subs.size() == 1)
-            {
-                fitness += rate * 5;
-            }
-            else if (subs.size() == 2)
-                fitness += rate * 2;
-            else
-                fitness -= rate * 2;
-        }
-        return fitness;
     }
     int sameSubjectPDFitness(vector<Schedule> &allSchedules, int rate)
     {
@@ -104,8 +82,9 @@ public:
             {
                 temp.insert(classTT[i][j].first);
             }
-            if (temp.size() == HOURS)
+            if (temp.size() >= HOURS - 1)
             {
+
                 fitness += rate;
             }
             fitness -= (HOURS - temp.size()) * rate;

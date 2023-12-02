@@ -1,0 +1,138 @@
+interface Institute {
+    string name;
+    vector<string> teachers;
+    vector<Schedule> allSchedules;
+
+    int DAYS, HOURS;
+    int POPULATION_SIZE, GENERATIONS;
+}
+
+interface Schedule {
+    string className;
+    vector<vector<pair<string, string>>> classTT; // one class's Week Time Table
+    unordered_map<string, string> choosenTeacher; // subject, teacher
+    int DAYS, HOURS;
+    int fitness;
+    vector<pair<string, pair<vector<string>, int>>> subjects;
+    unordered_map<string, int> tempSubjectHoursPW;
+}
+// void calcFitness(vector<Schedule> allSchedules)
+    // {
+    //     fitness = 0;
+
+    //     // original order 2: TO > LH > SSPD > SPPW
+    //     // step 1: check if sub and their lecture hours are completed in a week
+    //     fitness += lecHoursFitness(allSchedules, 200);
+
+    //     // step 2: check if teacher overlaps
+    //     fitness += teacherOverlapFitness(allSchedules, 200);
+
+    //     // step 3: if subject is taught in the same period in a week
+    //     fitness += samePeriodPWFitness(allSchedules, 70);
+
+    //     // step 4: if subject comes more than once in a day
+    //     fitness += sameSubjectPDFitness(allSchedules, 85);
+    // }
+    // void calcFitness(vector<Schedule> allSchedules)
+    // {
+    //     fitness = 0;
+
+    //     // order 1) TO > LH > SPPW > SSPD :
+    //     // step 1: check if sub and their lecture hours are completed in a week
+    //     fitness += lecHoursFitness(allSchedules, 200);
+
+    //     // step 2: check if teacher overlaps
+    //     fitness += teacherOverlapFitness(allSchedules, 200);
+
+    //     // step 3: if subject is taught in the same period in a week
+    //     fitness += samePeriodPWFitness(allSchedules, 85);
+
+    //     // step 4: if subject comes more than once in a day
+    //     fitness += sameSubjectPDFitness(allSchedules, 70);
+    // }
+     void calcFitness(vector<Schedule> allSchedules)
+    {
+        fitness = 0;
+
+        // order 3) TO > SPPW > LH > SSPD :
+        // step 2: check if teacher overlaps
+        fitness += teacherOverlapFitness(allSchedules, 200);
+
+        // step 1: check if sub and their lecture hours are completed in a week
+        fitness += lecHoursFitness(allSchedules, 140);
+
+        // step 3: if subject is taught in the same period in a week
+        fitness += samePeriodPWFitness(allSchedules, 170);
+
+        // step 4: if subject comes more than once in a day
+        fitness += sameSubjectPDFitness(allSchedules, 100);
+    }
+    void calcFitness(vector<Schedule> allSchedules)
+    {
+        fitness = 0;
+
+        // order 4) TO > SPPW > SSPD > LH :
+        // step 2: check if teacher overlaps
+        fitness += teacherOverlapFitness(allSchedules, 200);
+
+        // step 1: check if sub and their lecture hours are completed in a week
+        fitness += lecHoursFitness(allSchedules, 100);
+
+        // step 3: if subject is taught in the same period in a week
+        fitness += samePeriodPWFitness(allSchedules, 170);
+
+        // step 4: if subject comes more than once in a day
+        fitness += sameSubjectPDFitness(allSchedules, 140);
+    }
+    void calcFitness(vector<Schedule> allSchedules)
+    {
+        fitness = 0;
+
+        // order 5) TO > SSPD > LH > SPPW :
+        //  step 2: check if teacher overlaps
+        fitness += teacherOverlapFitness(allSchedules, 200);
+
+        // step 1: check if sub and their lecture hours are completed in a week
+        fitness += lecHoursFitness(allSchedules, 140);
+
+        // step 3: if subject is taught in the same period in a week
+        fitness += samePeriodPWFitness(allSchedules, 100);
+
+        // step 4: if subject comes more than once in a day
+        fitness += sameSubjectPDFitness(allSchedules, 170);
+    }
+
+    void calcFitness(vector<Schedule> allSchedules)
+    {
+        fitness = 0;
+
+        // order  6) TO > SSPD > SPPW > LH :
+        //  step 2: check if teacher overlaps
+        fitness += teacherOverlapFitness(allSchedules, 200);
+
+        // step 1: check if sub and their lecture hours are completed in a week
+        fitness += lecHoursFitness(allSchedules, 100);
+
+        // step 3: if subject is taught in the same period in a week
+        fitness += samePeriodPWFitness(allSchedules, 140);
+
+        // step 4: if subject comes more than once in a day
+        fitness += sameSubjectPDFitness(allSchedules, 170);
+    }
+    void calcFitness(vector<Schedule> allSchedules)
+    {
+        fitness = 0;
+
+        // 1) TO > LH > SPPW > SSPD :
+        //   step 2: check if teacher overlaps
+        fitness += teacherOverlapFitness(allSchedules, 200);
+
+        // step 1: check if sub and their lecture hours are completed in a week
+        fitness += lecHoursFitness(allSchedules, 170);
+
+        // step 3: if subject is taught in the same period in a week
+        fitness += samePeriodPWFitness(allSchedules, 140);
+
+        // step 4: if subject comes more than once in a day
+        fitness += sameSubjectPDFitness(allSchedules, 100);
+    }
