@@ -1,7 +1,7 @@
 # Timetable-using-GA
-Goal: Create Timetable using Genetic Algo
-Folders:
+Goal: Create Timetable using Genetic Algo\n
 Use: Lat folder for latest work.
+Folders:\n
 
 1. Old: It have basic implementation.
 2. Med: It have seperate file for classes
